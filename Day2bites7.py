@@ -20,7 +20,7 @@ with open(logfile) as f:
 def convert_to_datetime(line):
     match = re.search(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}', line)
     print(match)
-    date = datetime.strptime(match.group(), '%Y-%m-%dT%H:%M:%S')
+    date = datetime.strptime(match.group(), '%Y-%m-%dT%H:%M:%S') # .strftime('%Y, %m, %d, %H, %M, %S')
     print(date)
     return date
     '''TODO 1:
@@ -33,6 +33,20 @@ def convert_to_datetime(line):
 
 
 def time_between_shutdowns(loglines):
+    for line in loglines:
+        time_gap = []
+        if SHUTDOWN_EVENT in line:
+            time_gap.append(convert_to_datetime(line))
+        print(time_gap)
+        first_time = time_gap[0]
+        second_time = time_gap[1]
+        output = first_time - second_time
+        print(output)
+        return output
+
+
+
+
     '''TODO 2:
        Extract shutdown events ("Shutdown initiated") from loglines and calculate the
        timedelta between the first and last one.
@@ -43,3 +57,5 @@ def time_between_shutdowns(loglines):
 for line in loglines:
     print(line)
     convert_to_datetime(line)
+
+time_between_shutdowns(loglines)
