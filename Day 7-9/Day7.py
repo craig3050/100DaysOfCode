@@ -27,15 +27,15 @@ def get_first_model_each_manufacturer():
 
 
 def get_all_matching_models(grep='trail'):
-    myString = []
-    for item in cars:
-        for item2 in cars[item]:
-            if grep in item2:
-                print(item2)
-                myString.append(item2)
-            print(item2)
-    print(myString)
-    return myString
+    """return a list of all models containing the case insensitive
+       'grep' string which defaults to 'trail' for this exercise,
+       sort the resulting sequence alphabetically"""
+    grep = grep.lower()
+    models = sum(cars.values(), [])  # flatten list of lists
+    matching_models = [model for model in models
+                       if grep in model.lower()]
+    return sorted(matching_models)
+
 
     """return a list of all models containing the case insensitive
        'grep' string which defaults to 'trail' for this exercise,
@@ -44,6 +44,9 @@ def get_all_matching_models(grep='trail'):
 
 
 def sort_car_models():
+    """sort the car models (values) and return the resulting cars dict"""
+    return {manufacturer: sorted(models) for
+            manufacturer, models in cars.items()}
     """sort the car models (values) and return the resulting cars dict"""
     pass
 
