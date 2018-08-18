@@ -14,34 +14,47 @@ def game_loop():
     choice = input('Please choose [R]ock, [P]aper or [S]cissors\n')
     possible_choices = ['Rock', 'Paper', 'Scissors']
     computer_choice = random.choice(possible_choices)
-    print(f'computer chooses {computer_choice}')
-    if choice.lower() == computer_choice.lower():
+    print(f'Computer chooses {computer_choice}')
+    choice = assign_name(choice)
+    if choice == 'unknown':
+        print('I have no idea what is going on')
+    elif choice == computer_choice:
         print(f'It\'s a draw, you both choose {computer_choice}')
-## computer wins
-    elif choice.lower() == 'r' and computer_choice.lower() == 'paper':
-        print('The computer chose paper, you lose')
-    elif choice.lower() == 'p' and computer_choice.lower() == 'scissors':
-        print('The computer chose scissors, you lose')
-    elif choice.lower() == 's' and computer_choice.lower() == 'rock':
-        print('The computer chose rock, you lose')
-## player wins
-    elif computer_choice.lower() == 'rock' and choice.lower() == 'p':
-        print('The computer chose rock, you win')
-    elif computer_choice.lower() == 'paper' and choice.lower() == 's':
-        print('The computer chose paper, you win')
-    elif computer_choice.lower() == 'scissors' and choice.lower() == 'r':
-        print('The computer chose scissors, you win')
     else:
-        print('Well I don\'t really know what\'s going on then!!!')
+        winner = who_wins(choice, computer_choice)
+        print(f'You {winner}')
 
+
+
+# restart loop if yes.
     if input('Do you want to play again?? Y/N') == 'Y' or 'y':
         game_loop()
     else:
         print('OK, good bye!!!')
 
+def assign_name(name):
+    if name == ('r' or 'R' or 'Rock' or 'rock'):
+        return 'Rock'
+    if name == ('s' or 'S' or 'Scissors' or 'scissors'):
+        return 'Scissors'
+    if name == ('p' or 'P' or 'Paper' or 'paper'):
+        return 'Paper'
+    else:
+        return 'unknown'
 
-
-
+def who_wins(choice, computer_choice):
+    if choice == 'Rock' and computer_choice == "Paper":
+        return 'lose'
+    elif choice == 'Paper' and computer_choice == 'Scissors':
+        return 'lose'
+    elif choice == 'Scissors' and computer_choice == 'Rock':
+        return 'lose'
+    elif choice == 'Rock' and computer_choice == 'Scissors':
+        return 'win'
+    elif choice == 'Paper' and computer_choice == 'Rock':
+        return 'win'
+    elif choice == 'Scissors' and computer_choice == 'Paper':
+        return 'win'
 
 if __name__ == '__main__':
     main()
