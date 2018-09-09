@@ -108,3 +108,5 @@ venv.bak/
 *.xml
 *.xml
 *.xml
+.idea/100DaysOfCode.iml
+*.iml
