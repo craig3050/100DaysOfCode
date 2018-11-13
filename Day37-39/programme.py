@@ -1,8 +1,8 @@
-import CSV_import_rock as research
+import CSV_import_rock
 
 
 def main():
-    print(research.init())
+    print(CSV_import_rock.init())
 
 
 
